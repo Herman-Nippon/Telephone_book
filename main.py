@@ -125,6 +125,12 @@ def choose_directory() -> str:
 def choose_text_file(dir_path: str) -> str:
     files = [file for file in os.listdir(dir_path.strip("\"")) if file.endswith(".txt")]
 
+    if not files:
+        print("There's no text files in this directory. Created default.txt for you.")
+        with open("default.txt", "x"):
+            pass
+        return "default.txt"
+
     print("\nThose are the text files in this directory:", *[str(i) + ". " + f for i, f in enumerate(files, 1)], sep="\n")
 
     try:
